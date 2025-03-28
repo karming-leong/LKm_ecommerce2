@@ -1,14 +1,15 @@
 import React from 'react';
 import { Formik, Field, Form } from 'formik';
-import * as Yup from 'yup';
+import {useFlashMessage} from './FlashMessageStore';
+
 
 const validationSchema = Yup.object({
     name: Yup.string().required('Name is required'),
     email: Yup.string().email('Invalid email address').required('Email is required'),
-    password: Yup.string().min(8, 'Password must be at least 8 characters').required('Password is required'),
     confirmPassword: Yup.string()
-        .oneOf([Yup.ref('password'), null], 'Passwords must match')
-        .required('Confirm Password is required'),
+    password: Yup.string().min(8, 'Password must be at least 8 characters').required('Password is required'),
+    .oneOf([Yup.ref('password'), null], 'Passwords must match')
+    .required('Confirm Password is required'),
     salutation: Yup.string().required('Salutation is required'),
     country: Yup.string().required('Country is required'),
 });
@@ -19,11 +20,13 @@ function RegisterPage() {
         email: '',
         password: '',
         confirmPassword: '',
+        import * as Yup from 'yup';
         salutation: '',
         marketingPerferences: [],
         country: ''
     };
-
+    const {showMessage}= useFlashMessage();
+    
     const handleSubmit = (values, formikHelpers) => {
         //here to make API call to register users
         console.log('form values:', values);
