@@ -3,6 +3,9 @@ import NavBar from './Navbar';
 import HomePage from './HomePage';
 import ProductsPage from './ProductsPage';
 import RegisterPage from './RegisterPage';
+import UserLogin from './UserLogin';
+import Profile from './Profile';
+// import ShoppingCart from './ShoppingCart';
 import { Route, Switch } from 'wouter';
 import { useFlashMessage } from './FlashMessageStore';
 import './styles.css';
@@ -16,22 +19,22 @@ function App() {
     setNavBarShowing(!isNavBarShowing);
   }
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    const timer = setTimeout(() => {
-      clearMessage();
-    }
-      , 3000);
-    return () => {
-      clearTimeout(timer);
-    };
-  }
-    , [flashMessage]);
+  //   const timer = setTimeout(() => {
+  //     clearMessage();
+  //   }
+  //     , 3000);
+  //   return () => {
+  //     clearTimeout(timer);
+  //   };
+  // }
+  //   , [flashMessage]);
 
   return (
     <>
       <NavBar />
-  
+
       {flashMessage.message && (
         <div className={`alert alert-${flashMessage.type} text-center flash-alert`} role="alert">
           {flashMessage.message}
@@ -41,6 +44,11 @@ function App() {
         <Route path="/" component={HomePage} />
         <Route path="/products" component={ProductsPage} />
         <Route path="/register" component={RegisterPage} />
+        <Route path="/login" component={UserLogin} />
+        <Route path="/Profile" component={Profile} />
+        {/* <Route path="/cart" component={ShoppingCart} /> */}
+
+
       </Switch>
 
       <footer className="bg-dark text-white text-center py-3">
